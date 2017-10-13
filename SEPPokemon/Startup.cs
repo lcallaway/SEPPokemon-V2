@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.EntityFrameworkCore;
+using SEPPokemon.Models;
 
 namespace SEPPokemon
 {
@@ -22,6 +24,9 @@ namespace SEPPokemon
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
+
+            services.AddDbContext<SEPPokemonContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("SEPPokemonContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
